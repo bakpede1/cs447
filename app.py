@@ -1,7 +1,70 @@
+#imports
 from flask import Flask, render_template
 from flask import url_for, request, flash, redirect, session
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
-app = Flask(__name__)
+#SETUP
+app = Flask(__name__) #flask setup
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MealMe.db'
+app.config['SECRET_KEY'] = 'your_secret_key'
+db = SQLAlchemy(app) #sqalchemy setup
+'''DATABASE CLASSES GO HERE'''
+
+#######################################################################################
+# User Model
+class User(db.Model):
+    __tablename__ = 'user'
+
+    '''ATTRIBUTES'''
+
+    # Relationships
+    '''1-TO-1 ETC'''
+
+# Preference Model
+class Preference(db.Model):
+    __tablename__ = 'preference'
+
+
+# Meal Model
+class Meal(db.Model):
+    __tablename__ = 'meal'
+
+    
+
+    # Relationships
+    
+
+# CustomMeal Model (User's Custom Meals, MyMeals)
+class CustomMeal(db.Model):
+    __tablename__ = 'custom_meal'
+
+    
+
+# MealPlanner Model
+class MealPlanner(db.Model):
+    __tablename__ = 'meal_planner'
+
+    
+
+    # Relationships
+    
+
+# MealEntry Model
+class MealEntry(db.Model):
+    __tablename__ = 'meal_entry'
+
+    
+
+# Bookmark Model
+class Bookmark(db.Model):
+    __tablename__ = 'bookmark'
+
+
+#####################################################################
+
+
 
 # made routes for each html page (might not need some depending on path)
 #TODO: determine which routes need GETs or POSTs (for now)
@@ -37,7 +100,7 @@ def features_page():
 def forgot_password_page():
     return render_template('forgot_password.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login_page():
     return render_template('login.html')
 
@@ -65,5 +128,13 @@ def terms_of_service_page():
 def signup_page():
     return render_template('signup.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash('You have been logged out')
+    return redirect(url_for('login'))
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Create tables (if they dont exist yet)
+    db.create_all()
+    app.run(host='0.0.0.0', port=5000)
