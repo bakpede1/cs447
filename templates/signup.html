@@ -9,7 +9,7 @@
 <body>
     <header>
         <nav>
-            <a href="#" class="logo">MealMe</a>
+            <a href="/" class="logo">MealMe</a>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/features">Features</a></li>
@@ -20,20 +20,125 @@
             </ul>
         </nav>
     </header>
-    
+
     <section id="signup">
         <h2>Sign Up</h2>
-        <form action="/signup" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Create Account</button>
+        <form id="signup-form" action="/signup" method="post">
+            <!-- Step 1: Name -->
+            <div class="form-step active">
+                <label for="name">Let's Get Started with Your Name</label>
+                <input type="text" id="name" name="name" required oninput="validateName()">
+                <p id="name-info" class="info-text"></p>
+                 <div class="button-container">
+                <button type="button" class="next-btn" onclick="nextStep()" id="next-name" disabled>Next</button>
+            </div>
+            </div>
+
+            <!-- Step 2: Email -->
+            <div class="form-step">
+                <label for="email">What's Your Email Address?</label>
+                <input type="email" id="email" name="email" required oninput="validateEmail()">
+                <p id="email-info" class="info-text"></p>
+
+                 <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="button" class="next-btn" onclick="nextStep()" id="next-email" disabled>Next</button>
+            </div>
+        </div>
+            
+            <!-- Step 3: Password Creation -->
+            <div class="form-step">
+                <label for="password">Create a Secure Password</label>
+                <input type="password" id="password" name="password" required oninput="validatePassword()">
+                <p id="password-info" class="info-text">Password must be at least 8 characters, include two special characters, and three numbers.</p>
+
+                <label for="confirm-password">Confirm Your Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required oninput="validatePassword()">
+                <p id="password-match-info" class="info-text"></p>
+
+            <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="button" class="next-btn" onclick="nextStep()" id="next-password" disabled>Next</button>
+            </div>
+            </div>
+
+            <!-- Step 4: Dietary Preferences -->
+            <div class="form-step">
+                <label>Select Your Dietary Preferences</label>
+                <div class="checkbox-container">
+                    <label><input type="checkbox" name="dietary-preferences" value="Vegetarian"> Vegetarian</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Vegan"> Vegan</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Keto"> Keto</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Paleo"> Paleo</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Pescatarian"> Pescatarian</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Carnivore"> Carnivore</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Low-Carb"> Low-Carb</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Low-Fat"> Low-Fat</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Mediterranean"> Mediterranean</label>
+                </div>
+                
+        <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+            
+            <!-- Step 5: Dietary Restrictions -->
+            <div class="form-step">
+                <label>Select Any Dietary Restrictions</label>
+                <div class="checkbox-container">
+                    <label><input type="checkbox" name="dietary-restrictions" value="Kosher"> Kosher</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="No Gluten"> No Gluten</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Non-GMO"> Non-GMO</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Lactose-Free"> Lactose-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Nut-Free"> Nut-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Sugar-Free"> Sugar-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Soy-Free"> Soy-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Low Sodium"> Low Sodium</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Organic Only"> Organic Only</label>
+                </div>
+
+    <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+            </div>
+            </div>
+            
+            <!-- Step 6: Meal Frequency -->
+            <div class="form-step">
+                <label>How Many Meals Do You Eat in a Day?</label>
+                <select name="meal-frequency" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                 <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+            </div>
+            </div>
+            
+            <!-- Step 7: Review Preferences -->
+            <div class="form-step">
+                <h3>Review Your Preferences</h3>
+                <p><strong>Name:</strong> <span id="review-name"></span></p>
+                <p><strong>Email:</strong> <span id="review-email"></span></p>
+                <p><strong>Dietary Preferences:</strong> <span id="review-dietary-preferences"></span></p>
+                <p><strong>Dietary Restrictions:</strong> <span id="review-dietary-restrictions"></span></p>
+                <p><strong>Meal Frequency:</strong> <span id="review-meal-frequency"></span></p>
+
+                 <div class="button-container">
+                <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                <button type="submit" class="next-btn">Sign Up</button>
+            </div>
+            </div>
+
         </form>
     </section>
-    
+
     <footer>
         <p>&copy; 2024 MealMe. All rights reserved.</p>
         <nav>
@@ -41,5 +146,163 @@
             <a href="/terms-of-service">Terms of Service</a>
         </nav>
     </footer>
+
+    <script>
+        let currentStep = 0;
+        const formSteps = document.querySelectorAll(".form-step");
+
+        function showStep(step) {
+            formSteps.forEach((formStep, index) => {
+                formStep.classList.toggle("active", index === step);
+            });
+        }
+
+        function nextStep() {
+            currentStep++;
+            if (currentStep >= formSteps.length) currentStep = formSteps.length - 1;
+            showStep(currentStep);
+        }
+
+        function prevStep() {
+            currentStep--;
+            if (currentStep < 0) currentStep = 0;
+            showStep(currentStep);
+        }
+
+        // Validate Name Field
+        function validateName() {
+            const name = document.getElementById('name').value.trim();
+            const nameInfo = document.getElementById('name-info');
+            const nextNameButton = document.getElementById('next-name');
+
+            if (name.length > 0) {
+                nameInfo.textContent = "Looks good!";
+                nameInfo.classList.add('valid');
+                nameInfo.classList.remove('invalid');
+                nextNameButton.disabled = false;
+            } else {
+                nameInfo.textContent = "Name cannot be empty.";
+                nameInfo.classList.remove('valid');
+                nameInfo.classList.add('invalid');
+                nextNameButton.disabled = true;
+            }
+        }
+
+        // Validate Email Field
+        function validateEmail() {
+            const email = document.getElementById('email').value.trim();
+            const emailInfo = document.getElementById('email-info');
+            const nextEmailButton = document.getElementById('next-email');
+
+            // Basic email regex pattern
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (emailPattern.test(email)) {
+                emailInfo.textContent = "Valid email format!";
+                emailInfo.classList.add('valid');
+                emailInfo.classList.remove('invalid');
+                nextEmailButton.disabled = false;
+            } else {
+                emailInfo.textContent = "Please enter a valid email address.";
+                emailInfo.classList.remove('valid');
+                emailInfo.classList.add('invalid');
+                nextEmailButton.disabled = true;
+            }
+        }
+        
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const passwordInfo = document.getElementById('password-info');
+            const passwordMatchInfo = document.getElementById('password-match-info');
+            const nextPasswordButton = document.getElementById('next-password');
+
+            // Regular expressions for validation
+            const minLength = /.{8,}/; // At least 8 characters
+            const specialChars = /[^A-Za-z0-9]/g; // Special characters
+            const numbers = /[0-9]/g; // Numbers
+
+            // Check conditions
+            const hasMinLength = minLength.test(password);
+            const hasTwoSpecialChars = (password.match(specialChars) || []).length >= 2;
+            const hasThreeNumbers = (password.match(numbers) || []).length >= 3;
+
+            // Update password requirement message
+            if (hasMinLength && hasTwoSpecialChars && hasThreeNumbers) {
+                passwordInfo.textContent = "Password meets all requirements.";
+                passwordInfo.classList.add('valid');
+                passwordInfo.classList.remove('invalid');
+            } else {
+                passwordInfo.textContent = "Password must be at least 8 characters, include two special characters, and three numbers.";
+                passwordInfo.classList.remove('valid');
+                passwordInfo.classList.add('invalid');
+            }
+
+            // Update password match message
+            if (password && confirmPassword) {
+                if (password === confirmPassword) {
+                    passwordMatchInfo.textContent = "Passwords match!";
+                    passwordMatchInfo.classList.add('valid');
+                    passwordMatchInfo.classList.remove('invalid');
+                } else {
+                    passwordMatchInfo.textContent = "Passwords do not match.";
+                    passwordMatchInfo.classList.remove('valid');
+                    passwordMatchInfo.classList.add('invalid');
+                }
+            } else {
+                passwordMatchInfo.textContent = "";
+            }
+
+            // Enable Next button if both requirements and matching are satisfied
+            if (hasMinLength && hasTwoSpecialChars && hasThreeNumbers && password === confirmPassword) {
+                nextPasswordButton.disabled = false;
+                console.log("Next button enabled"); // Debugging line
+            } else {
+                nextPasswordButton.disabled = true;
+                console.log("Next button disabled"); // Debugging line
+            }
+        }
+
+        // Adding event listeners to handle both fields
+        document.getElementById('password').addEventListener('input', validatePassword);
+        document.getElementById('confirm-password').addEventListener('input', validatePassword);
+
+        // Function to capture and display user input in the review step
+        function populateReview() {
+            // Get values from form fields
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const mealFrequency = document.querySelector('select[name="meal-frequency"]').value;
+
+            // Get selected dietary preferences
+            const dietaryPreferences = Array.from(document.querySelectorAll('input[name="dietary-preferences"]:checked'))
+                                            .map(input => input.value)
+                                            .join(', ');
+
+            // Get selected dietary restrictions
+            const dietaryRestrictions = Array.from(document.querySelectorAll('input[name="dietary-restrictions"]:checked'))
+                                             .map(input => input.value)
+                                             .join(', ');
+
+            // Populate the review section
+            document.getElementById('review-name').textContent = name;
+            document.getElementById('review-email').textContent = email;
+            document.getElementById('review-meal-frequency').textContent = mealFrequency + ' meal(s) per day';
+            document.getElementById('review-dietary-preferences').textContent = dietaryPreferences || 'None';
+            document.getElementById('review-dietary-restrictions').textContent = dietaryRestrictions || 'None';
+        }
+
+        // Modify the `nextStep` function to call `populateReview()` when the user reaches the last step
+        function nextStep() {
+            currentStep++;
+            if (currentStep >= formSteps.length) currentStep = formSteps.length - 1;
+            showStep(currentStep);
+
+            // Call `populateReview()` when reaching the review step
+            if (currentStep === formSteps.length - 1) {
+                populateReview();
+            }
+        }
+    </script>
 </body>
 </html>

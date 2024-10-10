@@ -1,33 +1,53 @@
+/* Import Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* Basic styling reset and font */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
+/* Global styles */
 body {
     line-height: 1.6;
-    color: #333;
     background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Navigation Bar */
 header {
+    width: 100%;
     background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
-    border-bottom: 1px solid #ddd;
 }
 
 header nav {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 header nav a.logo {
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
+    font-weight: 600;
     color: #333;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 30px;
+    margin-right: 8px;
 }
 
 header nav ul {
@@ -39,72 +59,534 @@ header nav ul {
 header nav ul li a {
     text-decoration: none;
     color: #333;
+    font-weight: 500;
 }
 
 .sign-up-btn {
-    background-color: #ff5722;
+    background-color: #000;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     text-decoration: none;
 }
 
+/* Hero Section */
 #hero {
-    background: #ff5722;
-    color: #fff;
-    padding: 3rem 2rem;
+    width: 100%;
+    padding: 6rem 0; /* Increased padding for height */
     text-align: center;
+}
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+#hero h1 {
+    font-size: 3rem; /* Increased font size for impact */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+#hero p {
+    font-size: 1.2rem; /* Slightly larger text for readability */
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.cta-btn {
+    background-color: #FEC89A;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #FFA07A;
 }
 
 #hero h1 {
     font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
 }
 
 #hero p {
-    font-size: 1.2rem;
-    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
 }
-
-.cta-btn {
-    background-color: #fff;
-    color: #ff5722;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
+/* Call-to-Action Buttons */
+.cta-btn-secondary {
+    background-color: #FFB085;
+    color: #333;
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    border-radius: 8px;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem; /* Increased font size */
+    transition: background-color 0.3s;
 }
 
+.cta-btn-secondary:hover {
+    background-color: #FFA07A;
+}
+
+/* Features Section */
 #features {
-    padding: 2rem;
-    background-color: #fff;
+    padding: 4rem 2rem;
+    background-color: #FFE0B2;
     text-align: center;
 }
 
 #features h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .feature-box {
-    margin: 1rem 0;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .feature-box h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.feature-box p {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.feature-box ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.feature-box ul li {
+    color: #555;
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
+.feature-box ul li::before {
+    content: "⭐ ";
+    color: #FEC89A;
+}
+
+section {
+    width: 100%;
+    padding: 4rem 0;
+    background-color: #f9f9f9;
+}
+
+#testimonials{
+    background-color:#FFF3E0;
+}
+
+#how-it-works, #cta {
+    background-color: #fff;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* How It Works Section */
+#how-it-works h2,
+#testimonials h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4rem;
     text-align: center;
-    padding: 1rem 0;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+/* Testimonials Section */
+.testimonials-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+blockquote {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    flex: 1;
+    text-align: center;
+}
+
+#cta {
+    padding: 3rem 2rem;
+    background-color: #fff;
+    text-align: center;
+}
+
+#cta h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center; /* Ensures the text is centered */
+}
+
+#cta p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    text-align: center; /* Ensures the paragraph is also centered */
+}
+
+/* Footer */
+footer {
+    background-color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    width: 100%;
+    border-top: 1px solid #ddd;
+}
+
+footer p {
+    margin: 0.5rem 0;
+    font-weight: 500;
+    color: #333;
+}
+
+footer nav {
+    margin-top: 0.5rem;
 }
 
 footer nav a {
-    color: #fff;
+    color: #555;
     text-decoration: none;
     margin: 0 0.5rem;
+}
+
+footer nav a:hover {
+    text-decoration: underline;
+}
+
+/* Login page */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-form h1 {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.login-form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #000;
+    margin-bottom: 0.25rem;
+    text-align: left;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.login-btn:hover {
+    background-color: #333;
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-links a {
+    color: #555;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Signup - Form Container */
+#signup-form {
+    max-width: 500px; /* Increase the max width */
+    width: 100%;
+    background-color: #fff;
+    padding: 3rem 2rem; /* Increase padding for more spacing */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Increase font size for form labels */
+#signup-form label {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Increase font size and spacing for input fields */
+#signup-form input[type="text"],
+#signup-form input[type="email"],
+#signup-form input[type="password"],
+#signup-form select {
+    width: 100%;
+    padding: 1rem; /* Larger padding for inputs */
+    margin-bottom: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+/* Styling for the Next button */
+#signup-form .next-btn, 
+#signup-form .prev-btn {
+    width: 100%;
+    padding: 1rem; /* Increase button padding */
+    background-color: #FFB085;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem; /* Increase button font size */
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+#signup-form .next-btn:hover, 
+#signup-form .prev-btn:hover {
+    background-color: #FFA07A;
+}
+
+#signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+#signup h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Step Transition Styles */
+.form-step {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.form-step.active {
+    display: block;
+    opacity: 1;
+}
+
+
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+input[type="checkbox"] + label {
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.next-btn, .prev-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.next-btn:hover, .prev-btn:hover {
+    background-color: #555;
+}
+
+.prev-btn {
+    background-color: #777;
+    margin-right: 1rem;
+}
+
+.prev-btn:hover {
+    background-color: #999;
+}
+
+/* Sign Up Button */
+#signup-form .next-btn:last-child {
+    background-color: #FFB085;
+}
+
+#signup-form .next-btn:last-child:hover {
+    background-color: #FFA07A;
+}
+
+/* Informative Text Styling */
+.info-text {
+    color: #666;  /* Neutral color for information */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.info-text.valid {
+    color: #28a745; /* Green color when requirements are met */
+}
+
+.info-text.invalid {
+    color: #dc3545; /* Red color for unmet requirements */
+}
+
+/* Button Container for Previous and Next */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; /* Space between buttons */
+    margin-top: 1rem;
+}
+
+.button-container .prev-btn,
+.button-container .next-btn {
+    flex: 1; /* Make buttons equal width */
+    padding: 0.75rem;
+    background-color: #FFB085;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-container .prev-btn {
+    background-color: #ddd;
+    color: #333;
+}
+
+.button-container .prev-btn:hover,
+.button-container .next-btn:hover {
+    background-color: #FFA07A;
+}
+
+/* Styling the checkbox container to be a grid */
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 0.5rem; /* Space between checkboxes */
+    margin-bottom: 1rem;
+}
+
+/* Styling each label for better accessibility */
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 0.5rem; /* Space between checkbox and label text */
+    width: 1.2rem;
+    height: 1.2rem;
 }
