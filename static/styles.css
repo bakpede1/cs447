@@ -396,6 +396,114 @@ footer nav a:hover {
     font-size: 0.9rem;
     color: #999;
 }
+/* Forgot Password Link Styling */
+.forgot-password {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.forgot-password a {
+    color: #555;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+/* Forgot Password Page Styling */
+#forgot-password {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+#forgot-password h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#forgot-password p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+#forgot-password form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#forgot-password label {
+    text-align: left;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+#forgot-password input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+#forgot-password .error-message {
+    color: #d9534f;
+    font-size: 0.85rem;
+    text-align: left;
+    width: 100%;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+#forgot-password .reset-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#forgot-password .reset-btn:hover {
+    background-color: #555;
+}
+
+#forgot-password .return-link {
+    margin-top: 1.5rem;
+}
+
+#forgot-password .return-link a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+#forgot-password .return-link a:hover {
+    text-decoration: underline;
+}
+
+/* Success Message Styling */
+.success-message {
+    color: #28a745;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
 
 /* Signup - Form Container */
 #signup-form {
@@ -589,4 +697,457 @@ input[type="checkbox"] + label {
     margin-right: 0.5rem; /* Space between checkbox and label text */
     width: 1.2rem;
     height: 1.2rem;
+}
+
+/* Full-width container */
+#contact {
+    width: 100%;
+    padding: 2rem 5%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#contact h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#contact p {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Contact form centered within the full-width container */
+#contact-form {
+    width: 100%;
+    max-width: 600px; /* Constrain width for readability */
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#contact-form label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form select,
+#contact-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#contact-form .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contact-form .submit-btn:hover {
+    background-color: #555;
+}
+
+/* Centered contact information under the form */
+.contact-info {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #777;
+    text-align: center;
+}
+
+.contact-info a {
+    color: #333;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* About Page */
+#about {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+#about h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#about p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+#about .top-photo {
+    width: 80%; /* Smaller size */
+    max-width: 500px;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#why {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
+#why h2 {
+    font-size: 2.5rem; /* Larger font for impact */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#why ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#why ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2dbac;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for each item */
+}
+
+#why ul li::before {
+    content: "⭐";
+    font-size: 1.5rem;
+    color: #FFD700;
+    margin-right: 0.75rem;
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.why-choose-us li {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.why-choose-us li::before {
+    content: "⭐";
+    font-size: 1.5rem;
+    color: #FFD700;
+    margin-right: 1rem;
+}
+
+/* Service Section */
+#service {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+#service h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#service p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.icon-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.icon-gallery img {
+    width: 120px; /* Larger size */
+    height: auto;
+    border-radius: 8px;
+    
+}
+
+/* Call-to-Action Section */
+.call-to-action {
+    max-width: 1000px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.call-to-action p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.call-to-action .cta-btn {
+    background-color: #FFB085;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.call-to-action .cta-btn:hover {
+    background-color: #FFA07A;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 6rem; /* Adjusted to start below the header */
+    left: 1rem;
+    width: 180px;
+    background-color: #333;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 1.25rem;
+}
+
+.sidebar nav ul li a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+/* Sidebar link active state */
+.sidebar nav ul li a.active {
+    background-color: #444;
+    font-weight: bold;
+}
+
+/* Optional: Sidebar Link Hover Icon */
+.sidebar nav ul li a:hover::before {
+    content: '→ ';
+    color: #FFD700; /* Gold accent color for visual cue */
+    transition: color 0.3s;
+}
+
+/*Priv Policy page*/
+/* Content container styling */
+
+/* Main content styling */
+#privacy-policy-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+#privacy-policy-content h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#privacy-policy-content h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center; v  
+    color: #333;
+}
+
+#privacy-policy-content p,
+#privacy-policy-content ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+#privacy-policy-content ul {
+    padding-left: 1.5rem;
+}
+
+#privacy-policy-content ul li {
+    list-style-type: disc;
+    margin-bottom: 0.5rem;
+    max-width:1000px;
+}
+
+#sidebar-ppp {
+    width: 200px;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-right: 2rem;
+}
+
+#sidebar-ppp ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar-ppp ul li {
+    margin: 1rem 0;
+}
+
+#sidebar-ppp ul li a {
+    color: #fff; /* Changed to white for better readability */
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#sidebar-ppp ul li a:hover {
+    background-color: #555; /* Add hover background color */
+    color: #fff;
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Sidebar Navigation for Terms of Service */
+#sidebar-tos {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#sidebar-tos ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar-tos ul li {
+    margin-bottom: 1rem;
+}
+
+#sidebar-tos ul li a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar-tos ul li a:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+/* Terms of Service Content */
+#tos-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+#tos-content section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#tos-content h2 {
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 3rem;
 }

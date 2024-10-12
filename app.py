@@ -7,64 +7,148 @@ from datetime import datetime
 
 #SETUP
 app = Flask(__name__) #flask setup
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MealMe.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mm.db'
 app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app) #sqalchemy setup
-'''DATABASE CLASSES GO HERE'''
 
-#######################################################################################
+'''DATABASE CLASSES GO HERE'''
 # User Model
 class User(db.Model):
     __tablename__ = 'user'
 
-    '''ATTRIBUTES'''
+    user_id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    meal_frequency = db.Column(db.Integer, nullable=True)  # Meals per day
+    meal_labels = db.Column(db.String(200), nullable=True)  # Labels for meal times
+
+    def __init__(self, email, password_hash, name, meal_frequency=None, meal_labels=None):
+        self.email = email
+        self.password_hash = password_hash
+        self.name = name
+        self.meal_frequency = meal_frequency
+        self.meal_labels = meal_labels
 
     # Relationships
-    '''1-TO-1 ETC'''
+    preferences = db.relationship('Preference', backref='user', uselist=False, cascade="all, delete-orphan")
+    custom_meals = db.relationship('CustomMeal', backref='user', cascade="all, delete-orphan")
+    meal_planners = db.relationship('MealPlanner', backref='user', cascade="all, delete-orphan")
+    bookmarks = db.relationship('Bookmark', backref='user', cascade="all, delete-orphan")
 
 # Preference Model
 class Preference(db.Model):
     __tablename__ = 'preference'
 
+    preference_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    dietary_preferences = db.Column(db.String(120), nullable=True)
+    preferred_ingredients = db.Column(db.String(200), nullable=True)
+    allergies_intolerances = db.Column(db.String(200), nullable=True)
+    ingredients_to_avoid = db.Column(db.String(200), nullable=True)
+
+    def __init__(self, user_id, dietary_preferences=None, preferred_ingredients=None, allergies_intolerances=None, ingredients_to_avoid=None):
+        self.user_id = user_id
+        self.dietary_preferences = dietary_preferences
+        self.preferred_ingredients = preferred_ingredients
+        self.allergies_intolerances = allergies_intolerances
+        self.ingredients_to_avoid = ingredients_to_avoid
 
 # Meal Model
 class Meal(db.Model):
     __tablename__ = 'meal'
 
-    
+    meal_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    tags = db.Column(db.String(100), nullable=True)
+    ingredients = db.Column(db.Text, nullable=False)
+    instructions = db.Column(db.Text, nullable=True)
+    nutrition_info = db.Column(db.Text, nullable=True)
+    image_url = db.Column(db.String(200), nullable=True)
+
+    def __init__(self, name, ingredients, tags=None, instructions=None, nutrition_info=None, image_url=None):
+        self.name = name
+        self.ingredients = ingredients
+        self.tags = tags
+        self.instructions = instructions
+        self.nutrition_info = nutrition_info
+        self.image_url = image_url
 
     # Relationships
-    
+    meal_entries = db.relationship('MealEntry', backref='meal', cascade="all, delete-orphan")
 
-# CustomMeal Model (User's Custom Meals, MyMeals)
+# CustomMeal Model
 class CustomMeal(db.Model):
     __tablename__ = 'custom_meal'
 
-    
+    custom_meal_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    name = db.Column(db.String(120), nullable=False)
+    ingredients = db.Column(db.Text, nullable=False)
+    instructions = db.Column(db.Text, nullable=True)
+    tags = db.Column(db.String(100), nullable=True)
+    nutrition_info = db.Column(db.Text, nullable=True)
+    image_url = db.Column(db.String(200), nullable=True)
 
-# MealPlanner Model
-class MealPlanner(db.Model):
-    __tablename__ = 'meal_planner'
+    def __init__(self, user_id, name, ingredients, instructions=None, tags=None, nutrition_info=None, image_url=None):
+        self.user_id = user_id
+        self.name = name
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.tags = tags
+        self.nutrition_info = nutrition_info
+        self.image_url = image_url
 
-    
+        # MealPlanner Model
+        class MealPlanner(db.Model):
+            __tablename__ = 'meal_planner'
 
-    # Relationships
-    
+            planner_id = db.Column(db.Integer, primary_key=True)
+            user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+            creation_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-# MealEntry Model
-class MealEntry(db.Model):
-    __tablename__ = 'meal_entry'
+            def __init__(self, user_id, creation_date=None):
+                self.user_id = user_id
+                # Only set creation_date if passed, otherwise it uses the default
+                if creation_date:
+                    self.creation_date = creation_date
 
-    
+        # MealEntry Model
+        class MealEntry(db.Model):
+            __tablename__ = 'meal_entry'
 
-# Bookmark Model
-class Bookmark(db.Model):
-    __tablename__ = 'bookmark'
+            entry_id = db.Column(db.Integer, primary_key=True)
+            planner_id = db.Column(db.Integer, db.ForeignKey('meal_planner.planner_id'), nullable=False)
+            meal_id = db.Column(db.Integer, db.ForeignKey('meal.meal_id'), nullable=True)
+            custom_meal_id = db.Column(db.Integer, db.ForeignKey('custom_meal.custom_meal_id'), nullable=True)
+            day_of_week = db.Column(db.String(10), nullable=False)
+            meal_label = db.Column(db.String(50), nullable=True)
+            specific_time = db.Column(db.Time, nullable=False)
+            image_url = db.Column(db.String(200), nullable=True)
 
+            def __init__(self, planner_id, day_of_week, specific_time, meal_id=None, custom_meal_id=None, meal_label=None, image_url=None):
+                self.planner_id = planner_id
+                self.day_of_week = day_of_week
+                self.specific_time = specific_time
+                self.meal_id = meal_id
+                self.custom_meal_id = custom_meal_id
+                self.meal_label = meal_label
+                self.image_url = image_url
 
-#####################################################################
+        # Bookmark Model
+        class Bookmark(db.Model):
+            __tablename__ = 'bookmark'
 
+            bookmark_id = db.Column(db.Integer, primary_key=True)
+            user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+            meal_id = db.Column(db.Integer, db.ForeignKey('meal.meal_id'), nullable=True)
+            custom_meal_id = db.Column(db.Integer, db.ForeignKey('custom_meal.custom_meal_id'), nullable=True)
 
+            def __init__(self, user_id, meal_id=None, custom_meal_id=None):
+                self.user_id = user_id
+                self.meal_id = meal_id
+                self.custom_meal_id = custom_meal_id
 
 # made routes for each html page (might not need some depending on path)
 #TODO: determine which routes need GETs or POSTs (for now)
@@ -76,27 +160,44 @@ def landing_page():
 def about_page():
     return render_template('about.html')
 
-@app.route('/contact_us')
+@app.route('/contact')
 def contact_us_page():
     return render_template('contact_us.html')
 
-@app.route('/create_meal')
+@app.route('/create-meal')
 def create_meal_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+        
     return render_template('create_meal.html')
 
 @app.route('/bookmarks')
 def bookmarks_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+
+    
     return render_template('bookmarks.html')
 
 @app.route('/dashboard')
 def dashboard_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+
+        
     return render_template('dashboard.html')
 
 @app.route('/features')
 def features_page():
     return render_template('features.html')
 
-@app.route('/forgot_password')
+@app.route('/forgot-password')
 def forgot_password_page():
     return render_template('forgot_password.html')
 
@@ -104,23 +205,38 @@ def forgot_password_page():
 def login_page():
     return render_template('login.html')
 
-@app.route('/my_meals')
+@app.route('/my-meals')
 def my_meals_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+        
     return render_template('my_meals.html')
 
-@app.route('/privacy_policy')
+@app.route('/privacy-policy')
 def privacy_policy_page():
     return render_template('privacy_policy.html')
 
-@app.route('/profile_settings')
+@app.route('/profile-settings')
 def profile_settings_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+        
     return render_template('profile_settings.html')
 
 @app.route('/recipes')
 def recipes_page():
+    # access denied if not logged in
+    if 'user_id' not in session:
+        flash('Please log in first')
+        return redirect(url_for('login'))
+        
     return render_template('recipes.html')
 
-@app.route('/terms_of_service')
+@app.route('/terms-of-service')
 def terms_of_service_page():
     return render_template('terms_of_service.html')
 
@@ -136,5 +252,6 @@ def logout():
 
 if __name__ == '__main__':
     # Create tables (if they dont exist yet)
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0', port=5000)
