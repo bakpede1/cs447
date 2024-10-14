@@ -150,30 +150,41 @@ class CustomMeal(db.Model):
                 self.meal_id = meal_id
                 self.custom_meal_id = custom_meal_id
 
-# made routes for each html page (might not need some depending on path)
-#TODO: determine which routes need GETs or POSTs (for now)
+
+#TODO: Make preference object when signing up, and how to get data
+# from checkboxes to use for db objects/models
 @app.route('/')
 def landing_page():
     return render_template('landing.html')
 
-@app.route('/about')
+@app.route('/about', methods=['GET'])
 def about_page():
     return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET'])
 def contact_us_page():
     return render_template('contact_us.html')
 
-@app.route('/create-meal')
+@app.route('/create-meal', methods=['GET', 'POST'])
 def create_meal_page():
     # access denied if not logged in
     if 'user_id' not in session:
         flash('Please log in first')
         return redirect(url_for('login'))
-        
+
+    meal_name = request.form.get("meal-name")
+    ingredients = request.form.get("ingredients")
+    userID = user_id
+    if meal_name and ingredients:
+        m = CustomMeal(name=meal_name, ingredients=ingredients, user_id=userID)
+        db.session.add(m)
+        db.session.commit()
+        return render_template('create_meal.html')
+    else:
+        flash('Invalid Input(s)')
     return render_template('create_meal.html')
 
-@app.route('/bookmarks')
+@app.route('/bookmarks', methods=['GET' , 'POST'])
 def bookmarks_page():
     # access denied if not logged in
     if 'user_id' not in session:
@@ -181,70 +192,83 @@ def bookmarks_page():
         return redirect(url_for('login'))
 
     
+    # no form to get data from in html file
     return render_template('bookmarks.html')
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET'])
 def dashboard_page():
     # access denied if not logged in
     if 'user_id' not in session:
         flash('Please log in first')
         return redirect(url_for('login'))
-
-        
     return render_template('dashboard.html')
 
-@app.route('/features')
+@app.route('/features'. methods=['GET'])
 def features_page():
     return render_template('features.html')
 
-@app.route('/forgot-password')
+@app.route('/forgot-password', methods=['GET'])
 def forgot_password_page():
     return render_template('forgot_password.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
+    #need to figure out how to validate credentials
+    
     return render_template('login.html')
 
-@app.route('/my-meals')
+@app.route('/my-meals', methods=['GET'])
 def my_meals_page():
     # access denied if not logged in
     if 'user_id' not in session:
         flash('Please log in first')
         return redirect(url_for('login'))
-        
+
     return render_template('my_meals.html')
 
-@app.route('/privacy-policy')
+@app.route('/privacy-policy', methods=['GET'])
 def privacy_policy_page():
     return render_template('privacy_policy.html')
 
-@app.route('/profile-settings')
+@app.route('/profile-settings', methods=['GET'])
 def profile_settings_page():
     # access denied if not logged in
     if 'user_id' not in session:
         flash('Please log in first')
         return redirect(url_for('login'))
-        
+    #need to figure out how to update user settings    
+    
     return render_template('profile_settings.html')
 
-@app.route('/recipes')
+@app.route('/recipes', methods=['GET'])
 def recipes_page():
     # access denied if not logged in
     if 'user_id' not in session:
         flash('Please log in first')
         return redirect(url_for('login'))
-        
+    
     return render_template('recipes.html')
 
-@app.route('/terms-of-service')
+@app.route('/terms-of-service', methods=['GET', 'POST'])
 def terms_of_service_page():
     return render_template('terms_of_service.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET'] , 'POST')
 def signup_page():
+# still need to create preference object
+    name = request.signup-form.get("name")
+    email = request.signup-form.get("email")
+    password = request.signup-form.get("password")
+    if name and email and request:
+        u = User(name=name, email=email, password=password_hash)
+        db.session.add(u)
+        db.session.commit()
+        return render_template('signup.html')
+    else:
+        flash('Invalid Input(s)')
     return render_template('signup.html')
 
-@app.route('/logout')
+@app.route('/logout' methods=['GET'])
 def logout():
     session.pop('user_id', None)
     flash('You have been logged out')
