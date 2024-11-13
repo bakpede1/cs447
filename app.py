@@ -258,7 +258,7 @@ def terms_of_service_page():
 @app.route('/signup', methods=['GET'] , 'POST')
 def signup_page():
 # still need to create preference object
-    user_id = str(uuid4())
+    user_id = str(uuid.uuid4())
     name = request.signup-form.get("name")
     email = request.signup-form.get("email")
     password = request.signup-form.get("password")
