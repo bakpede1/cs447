@@ -4,6 +4,7 @@ from flask import url_for, request, flash, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+import uuid
 
 #SETUP
 app = Flask(__name__) #flask setup
@@ -24,7 +25,8 @@ class User(db.Model):
     meal_frequency = db.Column(db.Integer, nullable=True)  # Meals per day
     meal_labels = db.Column(db.String(200), nullable=True)  # Labels for meal times
 
-    def __init__(self, email, password_hash, name, meal_frequency=None, meal_labels=None):
+    def __init__(self, user_id, email, password_hash, name, meal_frequency=None, meal_labels=None):
+        self.user_id = user_id
         self.email = email
         self.password_hash = password_hash
         self.name = name
@@ -256,11 +258,12 @@ def terms_of_service_page():
 @app.route('/signup', methods=['GET'] , 'POST')
 def signup_page():
 # still need to create preference object
+    user_id = str(uuid4())
     name = request.signup-form.get("name")
     email = request.signup-form.get("email")
     password = request.signup-form.get("password")
-    if name and email and request:
-        u = User(name=name, email=email, password=password_hash)
+    if name and email and request and user_id:
+        u = User(user_id=user_id, name=name, email=email, password=password_hash)
         db.session.add(u)
         db.session.commit()
         return render_template('signup.html')
