@@ -258,17 +258,19 @@ def terms_of_service_page():
 @app.route('/signup', methods=['GET'] , 'POST')
 def signup_page():
 # still need to create preference object
-    user_id = str(uuid.uuid4())
-    name = request.signup-form.get("name")
-    email = request.signup-form.get("email")
-    password = request.signup-form.get("password")
-    if name and email and request and user_id:
-        u = User(user_id=user_id, name=name, email=email, password=password_hash)
-        db.session.add(u)
-        db.session.commit()
-        return render_template('signup.html')
-    else:
-        flash('Invalid Input(s)')
+    if request.method == "POST":
+        user_id = str(uuid.uuid4())
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        password_hash = generate_password_hash(password)
+        if name and email and request and user_id:
+            u = User(user_id=user_id, name=name, email=email, password_hash=password_hash)
+            db.session.add(u)
+            db.session.commit()
+        else:
+            flash('Invalid Input(s)')
+    
     return render_template('signup.html')
 
 @app.route('/logout' methods=['GET'])
