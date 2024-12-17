@@ -107,6 +107,15 @@ pip install flask flask-mail flask-session psycopg2 reportlab requests
 - **Plan Meals:** Use the weekly planner to set meals for each day.
 - **Export PDF:** Export your weekly meal plan as a PDF.
 
+## Known Issues
+**Dashboard Page:**
+
+- Cards on the dashboard page do not display custom meals. Only meals from the meals table appear correctly.
+PDF Export:
+
+**Text Overlap:** 
+- Long text for ingredients and instructions sometimes overlaps or gets cut off due to page height constraints. This issue remains unresolved
+
 ## Important Notes
 **Database:** Ensure the PostgreSQL database is running and accessible.
 **Images:** Images are uploaded to static/uploads/ and can also be fetched via URLs for PDFs.
