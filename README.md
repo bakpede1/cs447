@@ -20,7 +20,7 @@ MealMe is a Flask-based meal planner application that allows users to create, bo
 - **PDF Generation**: ReportLab
 - **Email Service**: Flask-Mail
 - **Frontend**: HTML, CSS
-- **Deployment**: Replit
+- **Deployment**: Replit (via Reserved VM) --OPTIONAL
 
 ---
 
