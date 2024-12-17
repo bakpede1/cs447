@@ -62,6 +62,27 @@ header nav ul li a {
     font-weight: 500;
 }
 
+.navuser ul li.profile {
+    display: flex;
+    align-items: center;
+}
+
+.navuser ul li.profile a img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%; /* Makes the image circular */
+    background-color: #ddd; /* Gray background */
+    padding: 5px; /* Adds padding inside the circle */
+    display: block;
+    border: 2px solid transparent;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s;
+}
+
+.navuser ul li.profile a img:hover {
+    border-color: #999; /* Slight border effect on hover */
+}
+
 .sign-up-btn {
     background-color: #000;
     color: #fff;
@@ -390,7 +411,7 @@ footer nav a:hover {
     text-decoration: underline;
 }
 
-.forgot-password {
+.forgot-password-1 {
     display: block;
     margin-top: 2rem;
     font-size: 0.9rem;
@@ -417,21 +438,27 @@ footer nav a:hover {
 /* Forgot Password Page Styling */
 #forgot-password {
     max-width: 400px;
-    margin: 3rem auto;
-    padding: 2rem;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2.5rem;
     text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #forgot-password h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
 }
 
 #forgot-password p {
     font-size: 1rem;
-    color: #666;
+    color: #555;
     margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
 #forgot-password form {
@@ -446,15 +473,24 @@ footer nav a:hover {
     font-size: 0.9rem;
     color: #333;
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 #forgot-password input[type="email"] {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
+    padding: 0.8rem;
+    margin-bottom: 1.2rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
+    font-size: 0.95rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#forgot-password input[type="email"]:focus {
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(85, 85, 85, 0.3); /* Adds subtle focus shadow */
+    outline: none;
 }
 
 #forgot-password .error-message {
@@ -475,11 +511,18 @@ footer nav a:hover {
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
 }
 
 #forgot-password .reset-btn:hover {
     background-color: #555;
+    transform: translateY(-2px); /* Slight animation for hover */
+}
+
+#forgot-password .reset-btn:active {
+    background-color: #111;
+    transform: translateY(1px); /* Simulate button press */
 }
 
 #forgot-password .return-link {
@@ -490,20 +533,22 @@ footer nav a:hover {
     color: #333;
     text-decoration: none;
     font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 #forgot-password .return-link a:hover {
     text-decoration: underline;
+    color: #111;
 }
 
 /* Success Message Styling */
 .success-message {
     color: #28a745;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin-top: 1.5rem;
     text-align: center;
 }
-
 
 /* Signup - Form Container */
 #signup-form {
@@ -788,7 +833,7 @@ input[type="checkbox"] + label {
 
 /* About Page */
 #about {
-    max-width: 800px;
+    max-width: 900px;
     margin: 2rem auto;
     padding: 1.5rem;
     text-align: center;
@@ -807,6 +852,7 @@ input[type="checkbox"] + label {
     font-size: 1rem;
     line-height: 1.6;
     color: #666;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 
@@ -820,7 +866,7 @@ input[type="checkbox"] + label {
 }
 
 #why {
-    max-width: 800px;
+    max-width: 900px;
     margin: 2rem auto;
     padding: 2rem;
     background-color: #fff;
@@ -864,15 +910,15 @@ input[type="checkbox"] + label {
 /* Why Choose Us Section */
 .why-choose-us {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
+    padding: 20px;
+    margin: 12px;
 }
 
 .why-choose-us li {
     display: flex;
-    align-items: center;
+    align-items: justify;
     background-color: #f9f9f9;
-    padding: 1rem;
+    padding: 3rem;
     margin-bottom: 1rem;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -887,7 +933,7 @@ input[type="checkbox"] + label {
 
 /* Service Section */
 #service {
-    max-width: 800px;
+    max-width: 900px;
     margin: 2rem auto;
     padding: 1.5rem;
     text-align: center;
@@ -924,7 +970,7 @@ input[type="checkbox"] + label {
 
 /* Call-to-Action Section */
 .call-to-action {
-    max-width: 1000px;
+    max-width: 900px;
     margin: 2rem auto;
     text-align: center;
     padding: 2rem;
@@ -1010,6 +1056,805 @@ input[type="checkbox"] + label {
     transition: color 0.3s;
 }
 
+/*Bookmarks page*/
+main.bookmarks-container {
+    padding: 20px 10px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.bookmark-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bookmark-header h1 {
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+.bookmark-header p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px; 
+    margin: auto;
+}
+
+.filter-options {
+    width: 220px;
+    padding: 15px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    height: auto;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    
+}
+
+.filter-label {
+    font-size: 0.9em;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.filter-options label,
+.filter-options p {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.styled-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.9em;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    appearance: none; /* Remove default dropdown arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    outline: none;
+}
+
+.styled-select:focus {
+    border-color: #888;
+    box-shadow: 0 0 5px rgba(136, 136, 136, 0.2);
+}
+
+.collapsible {
+    background-color: #e0e0e0;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1em;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.collapsible.active {
+    background-color: #d1d1d1;
+}
+
+.filter-content {
+    display: none;
+    padding: 10px 5px;
+}
+
+.filter-content label {
+    display: block;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    font-size: 0.85em;
+    color: #333;
+}
+
+.filter-content input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.clear-bookmarks {
+    display: block;
+    padding: 8px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    flex-grow: 1;
+    
+}
+
+.recipe-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    position: relative; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Hover effect */
+}
+
+/* Base styling for the star button */
+.star-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: transparent;
+    background-color: transparent;
+    border: 2px solid white; /* Default border for unbookmarked state */
+    border-radius: 50%; /* Circular background */
+    width: 24px;
+    height: 24px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    z-index: 10; /* Ensure it appears above other elements */
+}
+
+/* Styling for the bookmarked state */
+.star-btn.bookmarked {
+    color: white; /* White star for bookmarked state */
+    background-color: #fdd3d3; /* Reddish pink background for bookmarked state */
+    border: none; /* Remove border for cleaner appearance */
+}
+
+/* Tooltip for the button */
+.star-btn::after {
+    content: "Bookmark"; /* Tooltip text */
+    position: absolute;
+    top: 110%; /* Position below the button */
+    left: -40%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust centering */
+    background-color: black; /* Tooltip background */
+    color: white; /* Text color */
+    padding: 6px 12px; /* Proper spacing around the text */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 12px;
+    white-space: nowrap; /* Prevent line wrapping */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Ignore mouse events */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    z-index: 999; /* Ensure it appears above other elements */
+}
+
+/* Show the tooltip on hover */
+.star-btn:hover::after {
+    opacity: 1; /* Show tooltip */
+    transform: translateX(-50%) translateY(5px); /* Add slight upward animation */
+
+}
+
+/* Hover effect for both states */
+.star-btn:hover {
+    color: #ffc2c2; /* Slightly darker shade on hover */
+    transform: scale(1.1); /* Subtle scaling effect */
+    transition: color 0.2s, transform 0.2s; /* Smooth transition */
+}
+
+/* Responsive design: Adjust size for smaller screens */
+@media (max-width: 768px) {
+    .star-btn {
+        font-size: 16px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+#no-bookmarks { 
+    margin-left: 320px; 
+    margin-top: 50px;
+}
+
+/* Style for the top container */
+.bookmark-header {
+    width: 100%; /* Span the entire width */
+    padding: 40px 0; /* Adjust padding for spacing */
+    text-align: center; /* Center the content */
+    background-color: #f4f4f4; /* Match the body background color */
+    box-shadow: none; /* Remove any box-shadow */
+    border: none; /* Ensure no borders interfere */
+}
+
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.recipe-card h2 {
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.recipe-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0;
+}
+
+.expand-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.expand-btn:hover {
+    background-color: #555;
+}
+
+
+/* Profile Settings Page */
+.settings-container {
+    display: flex;
+    max-width: 1700px; /* Increased width for better layout */
+    margin: 30px auto; /* Added more space around */
+    padding: 30px;
+    background-color: #ffffff; /* Optional: Light background to highlight the container */
+    border-radius: 12px; /* Slightly rounded edges for a clean look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.settings-sidebar {
+    width: 250px; /* Increased width for better usability */
+    background-color: #f9f9f9; /* Slightly lighter background for subtle contrast */
+    border-radius: 10px; /* Match with container */
+    padding: 20px;
+    margin-right: 20px; /* Add space between the sidebar and content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for sidebar */
+}
+
+.settings-sidebar ul {
+    list-style: none;
+    font-weight: bold;
+}
+
+.settings-sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.settings-content {
+    padding: 20px; /* Add padding to the content */
+    background-color: #fff; /* Ensure a consistent background */
+    border-radius: 10px; /* Keep a modern design */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+}
+
+.settings-section-heading {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.preferences-section,
+.meal-settings-section,
+.security-section {
+    margin-bottom: 30px;
+}
+
+.preferences-options {
+    display: flex;
+    gap: 30px;
+}
+
+.dietary-preferences, .dietary-restrictions {
+    display: flex;
+    flex-direction: column;
+}
+
+.save-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.meal-name-time {
+    display: flex;
+    flex-direction: column; /* Change layout to vertical */
+    gap: 15px; /* Add spacing between rows */
+    margin-top: 10px;
+}
+
+.meal-name-time input {
+    width: 27%; /* Adjust width to fit container */
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.security-section input {
+    display: block;
+    width: 65%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 65%;
+    margin: 8px 0;
+}
+
+.password-container input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0 10px;
+    position: absolute;
+    right: 10px;
+    color: #555;
+}
+
+.toggle-password:hover {
+    color: #000;
+}
+
+/* Style when the password is visible */
+.toggle-password.active {
+    color: #000; 
+}
+
+.password-hint {
+    font-size: 0.85em;
+    color: red;
+    margin-top: -5px;
+}
+
+.password-mismatch {
+    font-size: 0.85em;
+    color: red;
+    display: none; /* Toggle visibility as needed */
+}
+
+.success-message {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+
+.signout-btn {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    width: 157px;
+    text-align: center;
+}
+
+#meals-per-day {
+    appearance: none; /* Remove default dropdown styling */
+    
+    padding: 10px; /* Add padding for a better look */
+    font-size: 16px; /* Set font size for better readability */
+    color: #333; /* Ensure text color is visible */
+    background-color: #fff; /* Set a white background */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    border-radius: 5px; /* Rounded corners for aesthetic */
+    cursor: pointer; /* Show a pointer on hover */
+}
+
+#meals-per-day option {
+    background-color: #fff; /* Ensure dropdown options have white background */
+    color: #333; /* Ensure dropdown options text is visible */
+    font-size: 16px; /* Match font size for readability */
+}
+
+
+/* dashboard i.e. meal planner page */
+.dashboard-container {
+    display: flex;
+    max-width: 1500px;
+    margin: 20px auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Edit Preferences Button at Top Left */
+.edit-pref-container {
+    position: flex;
+    top: 135px;
+    left: 48px;
+}
+
+#edit-preferences-btn {
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+#edit-preferences-btn:hover {
+    background-color: #333;
+}
+
+/* Main content */
+.main-content {
+    width: 1000px;
+    flex: 3;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20x;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.meal-plan table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.meal-plan th,
+.meal-plan td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.meal-plan th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+#update-plan-btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    size
+    transition: background-color 0.3s ease;
+}
+
+#update-plan-btn:hover {
+    background-color: #0056b3;
+}
+
+.left-panel {
+    background-color: black;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjust width as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px; /* Add space between panel and main content */
+}
+
+/* Additional Buttons */
+.additional-actions {
+    width: 100%;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.action-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* Add space between icon and text */
+}
+
+.action-btn:hover {
+    background-color: #f4f4f4;
+    border-color: #ccc;
+}
+
+/* Weekly Overview */
+#weekly-overview-card {
+    flex: 1.5;
+    background-color: #ffe0b2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#weekly-overview-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+#weekly-overview-card form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#plan-name {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Day Cards Grid */
+.day-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Individual Day Card */
+.day-card {
+    width: 100%;
+    height: 120px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+/* Card Front */
+.card-front {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    font-weight: bold;
+}
+
+/* Card Back */
+.card-back {
+    background-color: #fef3c7; /* Lighter orange for better readability */
+    color: #333;
+    transform: rotateY(180deg);
+    border: 1px solid #ddd;
+}
+
+.day-card:hover .card-inner {
+    transform: scale(1.03);
+}
+
+/* Export Button */
+#export-pdf-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+}
+
+#export-pdf-btn:hover {
+    background-color: #333;
+}
+
+/*Create meal page*/
+.meal-form-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.meal-form-container h1 {
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.meal-form-container p {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.meal-form label {
+    font-weight: bold;
+    margin-top: 15px;
+    display: block;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.meal-form input[type="text"],
+.meal-form input[type="number"],
+.meal-form input[type="file"],
+.meal-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-size: 0.9em;
+}
+
+.meal-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.dietary-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.dietary-labels label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.prep-cook-time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.prep-cook-time input[type="number"] {
+    width: 60px;
+    text-align: center;
+}
+
+.prep-cook-time span {
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 3px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-btn-2,
+.save-btn-2 {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn-2 {
+    background-color: #ccc;
+    color: #333;
+}
+
+.save-btn-2 {
+    background-color: #000;
+    color: #fff;
+}
 /*Priv Policy page*/
 /* Content container styling */
 
@@ -1150,4 +1995,718 @@ input[type="checkbox"] + label {
     text-align: center;
     margin-bottom: 0.5rem;
     margin-top: 3rem;
+}
+
+/*Dashboard page */
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+.main-content2 {
+    flex: 3;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 40px;
+    width: 1400px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.preferences-btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.preferences-btn:hover {
+    background-color: #333;
+}
+
+.meal-plan-editor {
+    width: 60%;
+    padding: 0 20px;
+}
+
+.day-plan {
+    margin-bottom: 15px;
+}
+
+.day-plan label {
+    display: block;
+    font-weight: bold;
+}
+
+
+.weekly-overview {
+    width: 20%;
+    background-color: #ffebcc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.weekly-overview h3 {
+    margin-top: 0;
+}
+
+.day-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.day-button:hover {
+    background-color: #f0f0f0;
+}
+
+.meal-summary {
+    font-size: 0.9em;
+    color: #555;
+    padding-top: 5px;
+}
+
+.card-container {
+    background-color: #FDD9A5;
+    width: 250px;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.input-label {
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.card-input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.day-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.day-card {
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 90%;
+    text-align: center;
+}
+
+.export-btn:hover {
+    background-color: #333;
+}
+
+.main-container{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.custom-dropdown {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    appearance: none; /* Remove default arrow */
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"%3E%3Cpath fill="%23333" d="M7 10l5 5 5-5z"/%3E%3C/svg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.custom-dropdown:hover {
+    border-color: #888;
+}
+
+.custom-dropdown:focus {
+    border-color: #555;
+    box-shadow: 0px 0px 6px rgba(85, 85, 85, 0.5);
+}
+
+.edit-btn {
+font-size: 1rem;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    position: relative;
+    left: 20px;
+    margin-bottom: 15px;
+}
+
+.edit-btn:hover {
+    background-color: #333;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit-btn:focus {
+    outline: 2px solid #555;
+    outline-offset: 
+}
+
+.update-btn {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    width: fit-content;
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    align-self: center;
+}
+
+.update-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.update-btn:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* My meals page */
+
+.my-meals-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.my-meals-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.my-meals-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.my-meals-header p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.meal-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+.meal-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.meal-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.meal-details img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Compact image */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.meal-details h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #333;
+}
+
+.meal-details p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0.5rem 0;
+}
+
+.meal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.tag {
+    background-color: #f1f1f1;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    color: #555;
+}
+
+.meal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.edit-btn-2,
+.delete-btn {
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.edit-btn-2 {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.edit-btn-2:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #ff4d4f;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #ff6b6c;
+}
+
+.add-meal {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.add-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #555;
+}
+
+.no-meals-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Adjust height for better centering */
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    background-color: #f9f9f9; /* Light gray background for contrast */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 2rem auto; /* Adds spacing */
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.no-meals-message a {
+    color: #f4927; /* Professional purple for call-to-action */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.no-meals-message a:hover {
+    color: #9e617c227; /* Darker purple on hover */
+    text-decoration: underline;
+}
+
+.no-meals-message a:active {
+    color: #d63078; /* Clicked (active) state: a vibrant pinkish-purple */
+    transform: scale(0.95); /* Adds a slight shrink effect for feedback */
+}
+
+/* Meal Image - Compact */
+.meal-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.add-btn:hover {
+    background-color: #555;
+}
+
+.my-meals-container .add-btn {
+    text-decoration: none !important;
+}
+
+/* Recipes Container */
+.recipe-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.page-title {
+    flex-basis: 100%;
+    text-align: left;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-recipes {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 25%;
+    flex-shrink: 0;
+}
+
+.filter-recipes h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.cook-time-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.apply-filters {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.apply-filters:hover {
+    background-color: #333;
+}
+
+.recipe-cards {
+    background-color: #f4f4f4;
+    flex: 1;
+    display: flex;
+    margin:0px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.search-bar {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    margin-top: 0px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    justify-items: center;
+    width: 100%;
+}
+
+.recipe-card {
+    width: 250px; /* Fixed width for all cards */
+    height: 400px; /* Fixed height for all cards */
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+}
+
+.recipe-card img {
+    width: 100%; /* Full width of the card */
+    height: 60%; /* 60% of card height */
+    object-fit: cover; /* Ensures image fills the space while keeping aspect ratio */
+    border-radius: 10px 10px 0 0;
+}
+
+.recipe-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-card p {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    color: #555;
+}
+
+.bookmark-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #f39c12;
+    cursor: pointer;
+}
+
+/* Modal Container */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* Title Styling */
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Recipe Image */
+.modal-image {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Bookmark Button */
+.bookmark-btn2 {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.bookmark-btn2:hover {
+    background-color: #444;
+}
+
+/* Modal Sections */
+.modal-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.modal-section h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.modal-section p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Tags Styling */
+.tags {
+    font-size: 14px;
+    color: #007BFF;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.tags span {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 2px;
+}
+
+/*Flash */
+
+.flash-messages {
+    margin: 1rem auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.flash {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
