@@ -31,3 +31,9 @@ Follow these steps to set up and run the project on Replit or locally.
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/bakpede1/cs447.git
+
+### 2. Install Dependencies
+
+Use pip to install all required dependencies:
+```bash
+pip install -r requirements.txt
