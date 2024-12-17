@@ -30,5 +30,4 @@ Follow these steps to set up and run the project on Replit or locally.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-repository-url.git
-cd MealMe
+git clone https://github.com/bakpede1/cs447.git
