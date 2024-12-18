@@ -57,10 +57,10 @@ pdfmetrics.registerFont(TTFont('Nunito', 'fonts/Nunito-Light.ttf'))
 def get_db_connection():
     """ Function to get a database connection """
     conn = psycopg2.connect(
-        host="ep-still-frost-a5c3qnx0.us-east-2.aws.neon.tech",
-        database="neondb",
-        user='neondb_owner',
-        password='QXuOhmn9BzG8')
+        host="",
+        database="",
+        user='',
+        password='')
     return conn
 
 def generate_temp_password(length=12):
