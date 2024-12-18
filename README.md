@@ -86,14 +86,14 @@ Open http://localhost:80 in your browser.
 3. Run the project using Replit's Run button.
 
 ## Dependencies
-Flask
-Flask-Mail
-Flask-Session
-Psycopg2
-ReportLab
-Requests
-Werkzeug
-Python 3.11+
+- Flask
+- Flask-Mail
+- Flask-Session
+- Psycopg2
+- ReportLab
+- Requests
+- Werkzeug
+- Python 3.11+
 
 Install them using:
 ```bash
@@ -109,23 +109,21 @@ pip install flask flask-mail flask-session psycopg2 reportlab requests
 
 ## Known Issues
 **Dashboard Page:**
-
 - Cards on the dashboard page do not display custom meals. Only meals from the meals table appear correctly.
-PDF Export:
 
-**Text Overlap:** 
-- Long text for ingredients and instructions sometimes overlaps or gets cut off due to page height constraints. This issue remains unresolved
+**PDF Export:**
+- Long text for ingredients and instructions sometimes overlaps or gets cut off due to page height constraints. This issue remains unresolved within the current time constraints.
 
 ## Important Notes
-**Database:** Ensure the PostgreSQL database is running and accessible.
-**Images:** Images are uploaded to static/uploads/ and can also be fetched via URLs for PDFs.
-**PDF Export:** Fonts like Montserrat, Lexend, and Nunito are required in the fonts/ directory for styling.
-**Emails:** Update MAIL_USERNAME and MAIL_PASSWORD in main.py to configure email services.
+- **Database:** Ensure the PostgreSQL database is running and accessible.
+- **Images:** Images are uploaded to static/uploads/ and can also be fetched via URLs for PDFs.
+- **PDF Export:** Fonts like Montserrat, Lexend, and Nunito are required in the fonts/ directory for styling.
+- **Emails:** Update MAIL_USERNAME and MAIL_PASSWORD in main.py to configure email services.
 
 ## Troubleshooting
-**Database Connection Error:** Verify credentials and ensure the PostgreSQL server is active.
-**Fonts Not Found:** Add missing .ttf font files in the fonts/ directory.
-**Replit Deployment Issue:** Use the Replit shell to install missing dependencies.
+- **Database Connection Error:** Verify credentials and ensure the PostgreSQL server is active.
+- **Fonts Not Found:** Add missing .ttf font files in the fonts/ directory.
+- **Replit Deployment Issue:** Use the Replit shell to install missing dependencies.
 
 
 ## License
