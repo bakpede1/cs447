@@ -8,29 +8,85 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navuser">
             <a href="#" class="logo">MealMe</a>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup" class="sign-up-btn">Sign Up</a></li>
+                <li><a href="/recipes">Find Recipes</a></li>
+                <li><a href="/my-meals">My Meals</a></li>
+                <li><a href="/bookmarks">Bookmarks</a></li>
+                <li><a href="/dashboard">Meal Planner</a></li>
+                <li class="profile"><a href="/profile-settings"><img src="../static/images/profile-icon.png" alt="Profile"></a></li>
             </ul>
         </nav>
     </header>
-    
-    <section id="create-meal">
-        <h2>Create a New Meal</h2>
-        <form action="/create-meal" method="post">
-            <label for="meal-name">Meal Name:</label>
-            <input type="text" id="meal-name" name="meal-name" required>
-            <label for="ingredients">Ingredients:</label>
-            <textarea id="ingredients" name="ingredients" required></textarea>
-            <button type="submit">Add Meal</button>
+
+    <main class="meal-form-container">
+        <h1>Create a New Meal</h1>
+        <p>Fill in the details below to add a custom meal to your custom meals collection.</p>
+
+        <form class="meal-form" method="POST" enctype="multipart/form-data">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <label for="meal-name">Meal Name</label>
+            <input type="text" name="meal-name" id="meal-name" placeholder="High Protein Pancakes" value="{{ meal_data.meal_name if meal_data else '' }}" required>
+
+            <label for="ingredients">Ingredients</label>
+            <textarea name="ingredients" id="ingredients" placeholder="e.g., 1 cup flour, 2 eggs, 1/2 cup milk" required>{{ meal_data.ingredients if meal_data else '' }}</textarea>
+
+            <label for="instructions">Instructions</label>
+            <textarea name="instructions" id="instructions" placeholder="Enter step-by-step cooking instructions">{{ meal_data.instructions if meal_data else '' }}</textarea>
+
+            <!-- Nutrition Info -->
+            <label for="nutrition-info">Nutrition Information</label>
+            <textarea name="nutrition-info" id="nutrition-info" placeholder="Calories: 300, Protein: 20g">{{ meal_data.nutrition_info if meal_data else '' }}</textarea>
+
+            <!-- Dietary Tags -->
+            <label>Dietary Labels</label>
+            <div class="dietary-labels">
+                {% set dietary_labels = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Pescatarian', 'Carnivore', 'Low-Carb', 'Low-Fat', 'Mediterranean'] %}
+                {% for label in dietary_labels %}
+                    <label>
+                        <input type="checkbox" name="tags" value="{{ label }}"
+                            {% if meal_data and label in meal_data.tags %}checked{% endif %}> {{ label }}
+                    </label>
+                {% endfor %}
+            </div>
+
+            <!-- Restrictions -->
+            <label>Restrictions</label>
+            <div class="dietary-labels">
+                {% set restrictions = ['Kosher', 'No Gluten', 'Non-GMO', 'Lactose-Free', 'Nut-Free', 'Sugar-Free', 'Soy-Free', 'Low Sodium', 'Organic Only'] %}
+                {% for restriction in restrictions %}
+                    <label>
+                        <input type="checkbox" name="restrictions" value="{{ restriction }}"
+                            {% if meal_data and restriction in meal_data.tags %}checked{% endif %}> {{ restriction }}
+                    </label>
+                {% endfor %}
+            </div>
+
+            <!-- Photo Upload -->
+            <label for="photo">Add a Photo</label>
+            <input type="file" name="photo" id="photo" accept="image/*">
+            {% if meal_data.image_url %}
+                <img src="{{ meal_data.image_url }}" alt="Meal Image" style="max-width: 150px; margin-top: 10px;">
+            {% endif %}
+
+            <!-- Submit/Cancel Buttons -->
+            <div class="form-buttons">
+                <button type="button" class="cancel-btn-2" onclick="location.href='/my-meals';">Cancel</button>
+                <button type="submit" class="save-btn-2">Save Meal</button>
+            </div>
         </form>
-    </section>
+    </main>
     
     <!-- Footer -->
     <footer>

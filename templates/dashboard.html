@@ -1,32 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MealMe - Dashboard</title>
+    <title>Meal Planner</title>
     <link rel="stylesheet" href="../static/styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="#" class="logo">MealMe</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup" class="sign-up-btn">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
+    </head>
+
+ <body>
+     <header>
+         <nav class="navuser">
+             <a href="#" class="logo">MealMe</a>
+             <ul>
+                 <li><a href="/recipes">Find Recipes</a></li>
+                 <li><a href="/my-meals">My Meals</a></li>
+                 <li><a href="/bookmarks">Bookmarks</a></li>
+                 <li><a href="/dashboard">Meal Planner</a></li>
+                 <li class="profile"><a href="/profile-settings"><img src="../static/images/profile-icon.png" alt="Profile"></a></li>
+             </ul>
+         </nav>
+     </header>
+
+     <main class="dashboard-container">
+         <!-- Edit Preferences Button -->
+         <div class="edit-pref-container">
+                     <aside class="left-panel">
+                         <div class="additional-actions">
+                             <button class="action-btn" onclick="window.location.href='/profile-settings'">
+                                 <img src="../static/icons/preferences-icon.png" alt="Preferences Icon" />
+                                 Edit Preferences
+                             </button>
+                             <button class="action-btn" onclick="window.location.href='/bookmarks'">
+                                 <img src="../static/icons/bookmark-icon.png" alt="Bookmarks Icon" />
+                                 Go to Bookmarks
+                             </button>
+                             <button class="action-btn" onclick="window.location.href='/recipes'">
+                                 <img src="../static/icons/recipe-icon.png" alt="Recipes Icon" />
+                                 Browse Recipes
+                             </button>
+                             <button class="action-btn" onclick="window.location.href='/my-meals'">
+                                 <img src="../static/icons/meals-icon.png" alt="Custom Meals Icon" />
+                                 View Custom Meals
+                             </button>
+                         </div>
+                     </aside>
+             <div class="flash-messages">
+                 {% with messages = get_flashed_messages(with_categories=True) %}
+                     {% if messages %}
+                         {% for category, message in messages %}
+                             <div class="flash {{ category }}">{{ message }}</div>
+                         {% endfor %}
+                     {% endif %}
+                 {% endwith %}
+             </div>
+                 </div>
+         
+
+         <section class="main-content2">
+             <h1>Edit Your Meal Plan</h1>
+             <div class="meal-plan">
+                 <form method="POST" action="/dashboard">
+                     <table>
+                         <thead>
+                             <tr>
+                                 <th>Day</th>
+                                 {% for idx in range(meal_preferences['meal_labels']|length) %}
+                                     <th>{{ meal_preferences['meal_labels'][idx] }} ({{ meal_preferences['meal_times'][idx] }})</th>
+                                 {% endfor %}
+                             </tr>
+                         </thead>
+                         <tbody>
+                             {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+                             <tr>
+                                 <td>{{ day }}</td>
+                                 {% for idx in range(meal_preferences['meal_labels']|length) %}
+                                 <td>
+                                     <select class="custom-dropdown" name="{{ day.lower() }}-{{ meal_preferences['meal_labels'][idx]|lower() }}">
+                                         <option value="" disabled>Select a meal</option>
+                                         {% for meal in user_meals %}
+                                             <option value="{{ meal.meal_id }}"
+                                                 {% if meal.meal_id == current_meals.get(day, {}).get(meal_preferences['meal_labels'][idx]) %}
+                                                     selected
+                                                 {% endif %}
+                                             >
+                                                 {{ meal.meal_name }}
+                                             </option>
+                                         {% endfor %}
+                                     </select>
+                                 </td>
+                                 {% endfor %}
+                             </tr>
+                             {% endfor %}
+                         </tbody>
+                     </table>
+                     <button type="submit" id="update-plan-btn">Update Meal Plan</button>
+                 </form>
+             </div>
+         </section>
+
+
+
+         <aside id="weekly-overview-card">
+             <h2>Weekly Overview</h2>
+             <form method="POST" action="/export-pdf">
+                 <label for="plan-name">Name:</label>
+                 <input type="text" id="plan-name" name="plan-name" placeholder="Enter Plan Name" required></form>
+             <div class="day-cards">
+                 {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+                 <div class="day-card">
+                     <div class="card-inner">
+                         <div class="card-front">{{ day }}</div>
+                         <div class="card-back">
+                             {% for meal in weekly_overview %}
+                                 {% if meal.day_of_week == day %}
+                                     <p><strong>{{ meal.meal_label }}:</strong> {{ meal.meal_name }}</p>
+                                 {% endif %}
+                             {% endfor %}
+                         </div>
+                     </div>
+                 </div>
+                 {% endfor %}
+             </div>
+             <button  type="submit" id="export-pdf-btn" onclick="window.location.href='/export-pdf'">Export to PDF</button>
+         </aside>
+         
+     
+     </main>
+
     
-    <section id="dashboard">
-        <h2>User Dashboard</h2>
-        <p>Welcome back! Here you can access your meal plans, saved recipes, and more.</p>
-    </section>
-    
-    <!-- Footer -->
+                   
+
     <footer>
         <p>MealMe – Your personalized meal planning assistant.</p>
         <nav>
@@ -39,6 +143,23 @@
         </nav>
         <p>&copy; 2024 MealMe. All rights reserved.</p>
     </footer>
-
 </body>
+
+    <script>document.querySelectorAll(".day-card").forEach((card) => {
+        card.addEventListener("click", () => {
+            const cardInner = card.querySelector(".card-inner");
+            cardInner.classList.toggle("flipped");
+        });
+    });
+    
+        document.getElementById("export-btn").addEventListener("click", function () {
+            const form = document.getElementById("meal-plan-form");
+            form.action = "/export-pdf";  // Temporarily set the action to export-pdf
+            form.method = "GET";          // Use GET to include plan_name in query string
+            form.submit();
+            form.action = "/dashboard";   // Reset to default action for next use
+            form.method = "POST";
+        });
+    
+    </script>
 </html>

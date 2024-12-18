@@ -29,9 +29,9 @@
                 <label for="name">Let's Get Started with Your Name</label>
                 <input type="text" id="name" name="name" required oninput="validateName()">
                 <p id="name-info" class="info-text"></p>
-                 <div class="button-container">
-                <button type="button" class="next-btn" onclick="nextStep()" id="next-name" disabled>Next</button>
-            </div>
+                <div class="button-container">
+                    <button type="button" class="next-btn" onclick="nextStep()" id="next-name" disabled>Next</button>
+                </div>
             </div>
 
             <!-- Step 2: Email -->
@@ -123,6 +123,15 @@
             
             <!-- Step 7: Review Preferences -->
             <div class="form-step">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <h3>Review Your Preferences</h3>
                 <p><strong>Name:</strong> <span id="review-name"></span></p>
                 <p><strong>Email:</strong> <span id="review-email"></span></p>

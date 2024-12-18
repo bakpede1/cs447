@@ -3,34 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MealMe - Profile Settings</title>
+    <title>My Profile Settings</title>
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navuser">
             <a href="#" class="logo">MealMe</a>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup" class="sign-up-btn">Sign Up</a></li>
+                <li><a href="/recipes">Find Recipes</a></li>
+                <li><a href="/my-meals">My Meals</a></li>
+                <li><a href="/bookmarks">Bookmarks</a></li>
+                <li><a href="/dashboard">Meal Planner</a></li>
+                <li class="profile"><a href="/profile-settings"><img src="../static/images/profile-icon.png" alt="Profile"></a></li>
             </ul>
         </nav>
     </header>
     
-    <section id="profile-settings">
-        <h2>Profile Settings</h2>
-        <form action="/profile" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="CurrentUsername">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="user@example.com">
-            <button type="submit">Save Changes</button>
+    <main class="settings-container">
+        <aside class="settings-sidebar">
+            <ul>
+                <li><a href="#preferences-section">Dietary Preferences</a></li>
+                <li><a href="#meal-settings-section">Meal Settings</a></li>
+                <li><a href="#security-section">Security & Password</a></li>
+            </ul>
+        </aside>
+
+        <section class="settings-content
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <form action="/update-preferences" method="POST">
+            <div class="preferences-section">
+                <h2 class="settings-section-heading">Dietary Preferences</h2>
+                <div class="preferences-options">
+                    <div class="dietary-preferences">
+                        <h3>Dietary Preferences</h3>
+                        <label><input type="checkbox" name="dietary_preferences" value="Vegetarian" {% if 'Vegetarian' in preferences[0] %} checked {% endif %}> Vegetarian</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Vegan" {% if 'Vegan' in preferences[0] %} checked {% endif %}> Vegan</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Keto" {% if 'Keto' in preferences[0] %} checked {% endif %}> Keto</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Paleo" {% if 'Paleo' in preferences[0] %} checked {% endif %}> Paleo</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Pescatarian" {% if 'Pescatarian' in preferences[0] %} checked {% endif %}> Pescatarian</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Carnivore" {% if 'Carnivore' in preferences[0] %} checked {% endif %}> Carnivore</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Low-Carb" {% if 'Low-Carb' in preferences[0] %} checked {% endif %}> Low-Carb</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Low-Fat" {% if 'Low-Fat' in preferences[0] %} checked {% endif %}> Low-Fat</label>
+                            <label><input type="checkbox" name="dietary_preferences" value="Mediterranean" {% if 'Mediterranean' in preferences[0] %} checked {% endif %}> Mediterranean</label>
+                        </div>
+                        <div class="dietary-restrictions">
+                            <h3>Dietary Restrictions</h3>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Kosher" {% if 'Kosher' in preferences[1] %} checked {% endif %}> Kosher</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="No Gluten" {% if 'No Gluten' in preferences[1] %} checked {% endif %}> No Gluten</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Non-GMO" {% if 'Non-GMO' in preferences[1] %} checked {% endif %}> Non-GMO</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Lactose-Free" {% if 'Lactose-Free' in preferences[1] %} checked {% endif %}> Lactose-Free</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Nut-Free" {% if 'Nut-Free' in preferences[1] %} checked {% endif %}> Nut-Free</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Sugar-Free" {% if 'Sugar-Free' in preferences[1] %} checked {% endif %}> Sugar-Free</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Soy-Free" {% if 'Soy-Free' in preferences[1] %} checked {% endif %}> Soy-Free</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Low Sodium" {% if 'Low Sodium' in preferences[1] %} checked {% endif %}> Low Sodium</label>
+                            <label><input type="checkbox" name="ingredients_to_avoid" value="Organic Only" {% if 'Organic Only' in preferences[1] %} checked {% endif %}> Organic Only</label>
+                        </div>
+                </div>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </div>
         </form>
-    </section>
+
+        <form action="/update-meal-settings" method="POST">
+            <div class="meal-settings-section">
+                <h2 class="settings-section-heading">Meal Settings</h2>
+                <label for="meals-per-day">Number of Meals per Day</label>
+                <select name="meal_frequency" id="meals-per-day" onchange="updateMealFields()">
+                    <option value="1" {% if meal_frequency == 1 %} selected {% endif %}> 1</option>
+                    <option value="2" {% if meal_frequency == 2 %} selected {% endif %}> 2</option>
+                    <option value="3" {% if meal_frequency == 3 %} selected {% endif %}> 3</option>
+                    <option value="4" {% if meal_frequency == 4 %} selected {% endif %}> 4</option>
+                    <option value="5" {% if meal_frequency == 5 %} selected {% endif %}> 5</option>
+            
+                </select>
+                <div id="meal-fields-container" class="meal-name-time">
+                    <!-- Meal inputs will be dynamically added here -->
+                </div>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+        </form>
+        
+
+        <form action="/update-password" method="POST">
+            <div id="security-section" class="security-section">
+                <h2 class="settings-section-heading">Security & Password</h2>
+                <label for="current-password">Current Password</label>
+                <div class="password-container">
+                    <input type="password" name="current_password" id="current-password">
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('current-password')">👁</button>
+                </div>
+
+                <label for="password">New Password</label>
+                <div class="password-container">
+                    <input type="password" name="new_password" id="password">
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">👁</button>
+                </div>
+                <p id="password-info" class="password-hint">Password must be at least 8 characters long, include two special characters, and three numbers.</p>
+
+                <label for="confirm-password">Confirm New Password</label>
+                <div class="password-container">
+                    <input type="password" name="confirm_password" id="confirm-password">
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">👁</button>
+                </div>
+                <p id="password-match-info" class="password-mismatch"></p>
+
+                <button type="submit" id="next-password" class="save-btn">Save Changes</button>
+            </div>
+        </form>
+
+            <button class="signout-btn" onclick="logout()">Sign Out</button>
+            <script>
+                function logout() {
+                    fetch('/logout', { method: 'POST' })
+                        .then(() => {
+                            window.location.href = '/login';
+                        });
+                }
+            </script>
+
+            <p id="success-message" class="success-message" style="display: none;">Your changes have been saved successfully!</p>
+
+        </section>
+    </main>
     
     <!-- Footer -->
     <footer>
@@ -47,4 +150,86 @@
     </footer>
 
 </body>
+
+    <script >
+        window.onload = function () {
+            updateMealFields(); // Trigger on page load
+        };
+
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.nextElementSibling;
+
+            const isPasswordVisible = passwordInput.getAttribute('type') === 'text';
+            passwordInput.setAttribute('type', isPasswordVisible ? 'password' : 'text');
+
+            // Toggle the active class for the button
+            if (isPasswordVisible) {
+                toggleButton.classList.remove('active');
+            } else {
+                toggleButton.classList.add('active');
+            }
+        }
+        
+        function showSuccessMessage(buttonId) {
+            const successMessage = document.getElementById('success-message');
+            const button = document.getElementById(buttonId);
+
+            button.addEventListener('click', () => {
+                successMessage.style.display = 'block'; // Show success message
+                setTimeout(() => {
+                    successMessage.style.display = 'none'; // Hide message after 3 seconds
+                }, 3000);
+            });
+        }
+
+        // Attach functionality to all "Save Changes" buttons
+        document.querySelectorAll('.save-btn').forEach(button => {
+            showSuccessMessage(button.id);
+        });
+
+        // ** Validate password functionality goes here
+
+        
+        function updateMealFields() {
+            const mealFieldsContainer = document.getElementById('meal-fields-container');
+            const numberOfMeals = document.getElementById('meals-per-day').value;
+
+            // Clear the existing fields
+            mealFieldsContainer.innerHTML = '';
+
+            // Data passed from the backend (already included in your Flask template)
+            const labels = {{ meal_labels|tojson }};
+            const times = {{ meal_times|tojson }};
+
+            // Generate new fields based on the selected number of meals
+            for (let i = 1; i <= numberOfMeals; i++) {
+                const mealNameInput = document.createElement('input');
+                mealNameInput.type = 'text';
+                mealNameInput.placeholder = `Meal Name ${i}`;
+                mealNameInput.name = `meal_name_${i}`;
+                mealNameInput.className = 'meal-input';
+                mealNameInput.value = labels[i - 1] || ''; // Use existing label if available
+
+                const mealTimeInput = document.createElement('input');
+                mealTimeInput.type = 'time';
+                mealTimeInput.placeholder = `Meal Time ${i}`;
+                mealTimeInput.className = 'meal-input';
+                mealTimeInput.name = `meal_time_${i}`;
+                mealTimeInput.value = times[i - 1] || ''; // Use existing time if available
+
+                mealFieldsContainer.appendChild(mealNameInput);
+                mealFieldsContainer.appendChild(mealTimeInput);
+            }
+        }
+
+
+        // Initialize with the default value (3 meals)
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMealFields();
+        });
+
+    
+    </script>
+    
 </html>

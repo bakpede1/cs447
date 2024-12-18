@@ -3,42 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MealMe - Bookmarks</title>
+    <title>My Bookmarked Recipes</title>
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#" class="logo">MealMe</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup" class="sign-up-btn">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section id="bookmarks">
-        <h2>Bookmarked Recipes</h2>
-        <p>Your favorite meals and recipes, saved for easy access.</p>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <p>MealMe – Your personalized meal planning assistant.</p>
-        <nav>
-            <a href="/about">About Us</a> |
-            <a href="/privacy-policy">Privacy Policy</a> |
-            <a href="/contact">Contact Us</a> |
-            <a href="/terms-of-service">Terms of Service</a> |
-            <a href="/signup">Sign Up</a> |
-            <a href="/login">Log In</a>
-        </nav>
-        <p>&copy; 2024 MealMe. All rights reserved.</p>
-    </footer>
+<header>
+    <nav class="navuser">
+        <a href="#" class="logo">MealMe</a>
+        <ul>
+            <li><a href="/recipes">Find Recipes</a></li>
+            <li><a href="/my-meals">My Meals</a></li>
+            <li><a href="/bookmarks">Bookmarks</a></li>
+            <li><a href="/dashboard">Meal Planner</a></li>
+            <li class="profile"><a href="/profile-settings"><img src="../static/images/profile-icon.png" alt="Profile"></a></li>
+        </ul>
+    </nav>
+</header>
 
+<main class="bookmarks-container">
+<!-- Header Section -->
+<section class="bookmark-header">
+    <h1>My Bookmarked Recipes</h1>
+    <p>Manage your bookmarked recipes. Toggle off to remove a bookmark.</p>
+</section>
+
+<div class="content-wrapper">
+     <!-- Sidebar for Filters -->
+    <aside class="filter-options">
+        <form method="POST">
+        <!-- Sorting Section -->
+        <label for="sort-options" class="filter-label">Sort Options</label>
+        <select id="sort-options" class="styled-select" onchange="sortBookmarks()">
+            <option>A-Z</option>
+            <option>Z-A</option>
+        </select>
+
+            <!-- Diet Options -->
+            <div class="filter-section">
+                <button type="button" class="collapsible">Diet Options</button>
+                <div class="filter-content">
+                    <label><input type="checkbox" name="diet" value="Vegetarian" onchange="filterBookmarks()"> Vegetarian</label>
+                    <label><input type="checkbox" name="diet" value="Vegan" onchange="filterBookmarks()"> Vegan</label>
+                    <label><input type="checkbox" name="diet" value="Keto" onchange="filterBookmarks()"> Keto</label>
+                    <label><input type="checkbox" name="diet" value="Paleo" onchange="filterBookmarks()"> Paleo</label>
+                    <label><input type="checkbox" name="diet" value="Pescatarian" onchange="filterBookmarks()"> Pescatarian</label>
+                    <label><input type="checkbox" name="diet" value="Carnivore" onchange="filterBookmarks()"> Carnivore</label>
+                </div>
+            </div>
+
+            <!-- Restrictions -->
+            <div class="filter-section">
+                <button type="button" class="collapsible">Restrictions</button>
+                <div class="filter-content">
+                    <label><input type="checkbox" name="restriction" value="Kosher" onchange="filterBookmarks()"> Kosher</label>
+                    <label><input type="checkbox" name="restriction" value="No Gluten" onchange="filterBookmarks()"> No Gluten</label>
+                    <label><input type="checkbox" name="restriction" value="Non-GMO" onchange="filterBookmarks()"> Non-GMO</label>
+                    <label><input type="checkbox" name="restriction" value="Lactose-Free" onchange="filterBookmarks()"> Lactose-Free</label>
+                    <label><input type="checkbox" name="restriction" value="Nut-Free" onchange="filterBookmarks()"> Nut-Free</label>
+                </div>
+            </div>
+        </form>
+        <!-- Clear All Bookmarks Button -->
+        <button class="clear-bookmarks" onclick="clearAllBookmarks()">Clear All Bookmarks</button>
+    </aside>
+
+<!-- Bookmarked Recipes Section -->
+<section class="recipe-container">
+
+    <!-- Recipe Grid -->
+    <section class="recipes-grid">
+        {% for meal in meals %}
+            <div class="recipe-card" data-tags="{{ meal.tags }}" data-meal-id="{{ meal.meal_id }}">
+                <!-- Bookmark Button -->
+                <button class="star-btn bookmarked" onclick="toggleBookmark(this, '{{ meal.meal_id }}')">★</button>
+                <!-- Recipe Content -->
+                <img src="{{ meal.image_url }}" alt="{{ meal.meal_name }}">
+                <h2>{{ meal.meal_name }}</h2>
+                <button class="expand-btn" onclick="expandRecipe({ 
+                    meal_name: '{{ meal.meal_name }}', 
+                    image_url: '{{ meal.image_url }}', 
+                    ingredients: `{{ meal.ingredients }}`, 
+                    instructions: `{{ meal.instructions }}`,
+                    nutrition_info: `{{ meal.nutrition_info | safe }}` 
+                })">Expand</button>
+            </div>
+        {% else %}
+            <!-- Centered No Bookmarks Message -->
+            <p id="no-bookmarks" style="
+                    justify-content: center;
+                    align-items: center;
+                    height: 50vh; /* Adjust for centering vertically */
+                    text-align: center;
+                    font-size: 1.8em;
+                    color: #555;
+                ">
+                You have no bookmarked recipes.
+            </p>
+        {% endfor %}
+    </section>
+</section
+</div>
+</main>
+
+
+<!-- Modal for Recipe Details -->
+<div id="recipe-modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <img id="modal-image" src="" alt="Recipe Image" class="modal-image">
+        <div class="modal-section">
+            <h3>Ingredients</h3>
+            <p id="modal-ingredients"></p>
+        </div>
+        <div class="modal-section">
+            <h3>Instructions</h3>
+            <p id="modal-instructions"></p>
+        </div>
+        <div class="modal-section">
+            <h3>Nutrition Info</h3>
+            <p id="modal-nutrition-info"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+<p>MealMe – Your personalized meal planning assistant.</p>
+<nav>
+    <a href="/about">About Us</a> |
+    <a href="/privacy-policy">Privacy Policy</a> |
+    <a href="/contact">Contact Us</a> |
+    <a href="/terms-of-service">Terms of Service</a> |
+    <a href="/signup">Sign Up</a> |
+    <a href="/login">Log In</a>
+</nav>
+<p>&copy; 2024 MealMe. All rights reserved.</p>
+</footer>
+
+<script>
+    // Collapsible filters
+    document.querySelectorAll('.collapsible').forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('active');
+            const content = button.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+
+    // Toggle Bookmark and Remove Card
+    function toggleBookmark(button, mealId) {
+        fetch('/toggle-bookmark', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ meal_id: mealId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const card = button.closest('.recipe-card');
+                card.remove();
+
+                // Show "No Bookmarks" message if grid is empty
+                if (document.querySelectorAll('.recipe-card').length === 0) {
+                    document.getElementById('no-bookmarks').style.display = 'block';
+                }
+            } else {
+                alert('Failed to remove bookmark.');
+            }
+        });
+    }
+
+    // Clear All Bookmarks
+    function clearAllBookmarks() {
+        fetch('/clear-bookmarks', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.querySelectorAll('.recipe-card').forEach(card => card.remove());
+                    document.getElementById('no-bookmarks').style.display = 'block';
+                } else {
+                    alert('Failed to clear bookmarks.');
+                }
+            });
+    }
+
+    // Expand Recipe Modal
+    function expandRecipe(recipe) {
+        document.getElementById('modal-title').textContent = recipe.meal_name;
+        document.getElementById('modal-image').src = recipe.image_url;
+        document.getElementById('modal-ingredients').textContent = recipe.ingredients;
+        document.getElementById('modal-instructions').textContent = recipe.instructions;
+        document.getElementById('modal-nutrition-info').textContent = recipe.nutrition_info;
+        document.getElementById('recipe-modal').style.display = 'flex';
+    }
+
+    function closeModal(event) {
+        if (!event || event.target.className === 'modal' || event.target.className === 'close-btn') {
+            document.getElementById('recipe-modal').style.display = 'none';
+        }
+    }
+
+    // Filtering Recipes
+    function filterBookmarks() {
+        const selectedDiets = Array.from(document.querySelectorAll('input[name="diet"]:checked')).map(input => input.value);
+        const selectedRestrictions = Array.from(document.querySelectorAll('input[name="restriction"]:checked')).map(input => input.value);
+
+        document.querySelectorAll('.recipe-card').forEach(card => {
+            const tags = card.dataset.tags || '';
+            const matchesDiets = selectedDiets.every(diet => tags.includes(diet));
+            const matchesRestrictions = !selectedRestrictions.some(restriction => tags.includes(restriction));
+
+            card.style.display = matchesDiets && matchesRestrictions ? 'block' : 'none';
+        });
+    }
+
+    function sortBookmarks() {
+        const sortOption = document.getElementById('sort-options').value;
+        const recipesGrid = document.querySelector('.recipes-grid');
+        const recipeCards = Array.from(recipesGrid.querySelectorAll('.recipe-card'));
+
+        recipeCards.sort((a, b) => {
+            const nameA = a.querySelector('h2').textContent.toLowerCase();
+            const nameB = b.querySelector('h2').textContent.toLowerCase();
+
+            if (sortOption === 'A-Z') {
+                return nameA.localeCompare(nameB);
+            } else if (sortOption === 'Z-A') {
+                return nameB.localeCompare(nameA);
+            }
+            return 0;
+        });
+
+        // Re-append sorted cards to the grid
+        recipesGrid.innerHTML = '';
+        recipeCards.forEach(card => recipesGrid.appendChild(card));
+    }
+    </script>
 </body>
 </html>

@@ -8,23 +8,122 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navuser">
             <a href="#" class="logo">MealMe</a>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/features">Features</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup" class="sign-up-btn">Sign Up</a></li>
+                <li><a href="/recipes">Find Recipes</a></li>
+                <li><a href="/my-meals">My Meals</a></li>
+                <li><a href="/bookmarks">Bookmarks</a></li>
+                <li><a href="/dashboard">Meal Planner</a></li>
+                <li class="profile"><a href="/profile-settings"><img src="../static/images/profile-icon.png" alt="Profile"></a></li>
             </ul>
         </nav>
     </header>
     
-    <section id="recipes">
-        <h2>Recipes</h2>
-        <p>Explore new recipes and add them to your meal plans!</p>
-    </section>
+    <main class="recipe-container">
+        <h1 class="page-title">Find Recipes</h1>
+        <!-- Sidebar for Filters -->
+        <aside class="filter-recipes">
+            <h2>Filter Recipes</h2>
+              <form action="/recipes" method="POST">
+            <div class="filter-group">
+                <h3>Dietary Preferences</h3>
+                <div class="checkbox-container">
+                    <label><input type="checkbox" name="dietary-preferences" value="Vegetarian"> Vegetarian</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Vegan"> Vegan</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Keto"> Keto</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Paleo"> Paleo</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Pescatarian"> Pescatarian</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Carnivore"> Carnivore</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Low-Carb"> Low-Carb</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Low-Fat"> Low-Fat</label>
+                    <label><input type="checkbox" name="dietary-preferences" value="Mediterranean"> Mediterranean</label>
+                </div>
+            </div>
+
+
+            <div class="filter-group">
+                <h3>Dietary Restrictions</h3>
+                <div class="checkbox-container">
+                    <label><input type="checkbox" name="dietary-restrictions" value="Kosher"> Kosher</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="No Gluten"> No Gluten</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Non-GMO"> Non-GMO</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Lactose-Free"> Lactose-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Nut-Free"> Nut-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Sugar-Free"> Sugar-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Soy-Free"> Soy-Free</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Low Sodium"> Low Sodium</label>
+                    <label><input type="checkbox" name="dietary-restrictions" value="Organic Only"> Organic Only</label>
+                </div>
+            </div>
+
+            <button class="apply-filters" type="submit" onclick="getSelectedPreferences()">Apply Filters</button>
+</form>
+        </aside>
+
+        <!-- Recipe Cards -->
+        <section class="recipe-cards">
+            <div class="search-bar">
+                <input type="text" 
+                    id="search-input" 
+                    placeholder="Search recipes..." 
+                    oninput="filterRecipes()"  />
+            </div>
+
+            <div class="recipes-grid">
+                {% for meal in meals %}
+                    <div class="recipe-card" data-name="{{ meal.meal_name | lower }}">
+                        <button 
+                            class="star-btn {% if meal.bookmarked %}bookmarked{% endif %}" 
+                            data-meal-id="{{ meal.meal_id }}"
+                            onclick="toggleBookmark(this)">
+                            ★
+                        </button>
+                        <img src="{{ meal.image_url }}" alt="{{ meal.meal_name }}">
+                        <h2>{{ meal.meal_name }}</h2>
+                        <button class="expand-btn" onclick="expandRecipe({ 
+                            meal_name: '{{ meal.meal_name }}', 
+                            image_url: '{{ meal.image_url }}', 
+                            ingredients: `{{ meal.ingredients }}`, 
+                            instructions: `{{ meal.instructions }}`,
+                            nutrition_info: `{{ meal.nutrition_info | safe }}` 
+                        })">Expand</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>: 
+    </main>
+
+    <!-- Modal for Recipe Details -->
+    <div id="recipe-modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <!-- Recipe Title -->
+            <h2 id="modal-title" class="modal-title">Recipe Title</h2>
+
+            <!-- Recipe Image -->
+            <img id="modal-image" src="" alt="Recipe Image" class="modal-image">
+
+            <!-- Ingredients Section -->
+            <div class="modal-section">
+                <h3>Ingredients</h3>
+                <p id="modal-ingredients">Example ingredients...</p>
+            </div>
+
+            <!-- Instructions Section -->
+            <div class="modal-section">
+                <h3>Instructions</h3>
+                <p id="modal-instructions">Example instructions...</p>
+            </div>
+
+            <!-- Nutrition Info Section -->
+            <div class="modal-section">
+                <h3>Nutrition Info</h3>
+                <p id="modal-nutrition-info">Example nutrition info...</p>
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer>
@@ -33,12 +132,103 @@
             <a href="/about">About Us</a> |
             <a href="/privacy-policy">Privacy Policy</a> |
             <a href="/contact">Contact Us</a> |
-            <a href="/terms-of-service">Terms of Service</a> |
             <a href="/signup">Sign Up</a> |
             <a href="/login">Log In</a>
         </nav>
         <p>&copy; 2024 MealMe. All rights reserved.</p>
     </footer>
 
+    <script> 
+
+        function toggleBookmark(button) {
+            const mealId = button.getAttribute('data-meal-id');
+            const isBookmarked = button.classList.contains('bookmarked');
+
+            fetch('/toggle-bookmark', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    meal_id: mealId,
+                    action: isBookmarked ? 'remove' : 'add'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    button.classList.toggle('bookmarked'); // Toggle bookmark class
+                } else {
+                    alert('Error toggling bookmark');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function filterRecipes() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const recipeCards = document.querySelectorAll('.recipe-card');
+
+            recipeCards.forEach(card => {
+                const recipeName = card.getAttribute('data-name');
+                if (recipeName.includes(searchInput)) {
+                    card.style.display = 'block'; // Show matching recipe
+                } else {
+                    card.style.display = 'none'; // Hide non-matching recipe
+                }
+            });
+        }
+        
+        function expandRecipe(recipe) {
+            const modal = document.getElementById('recipe-modal');
+
+            // Populate modal with recipe details
+            document.getElementById('modal-title').textContent = recipe.meal_name;
+            document.getElementById('modal-image').src = recipe.image_url;
+            document.getElementById('modal-ingredients').innerHTML = `<strong>Ingredients:</strong> ${recipe.ingredients}`;
+            document.getElementById('modal-instructions').innerHTML = `<strong>Instructions:</strong> ${recipe.instructions}`;
+
+            // Format and display nutrition info
+            document.getElementById("modal-nutrition-info").innerHTML =
+            `<strong>Nutrition Info:</strong> ${recipe.nutrition_info}`;
+
+            // Show the modal
+            modal.style.display = 'flex'; // Flex ensures centering with justify-content and align-items
+        }
+
+        function getSelectedPreferences() {
+            const selectedPreferences = Array.from(
+                document.querySelectorAll('input[name="dietary-preferences"]:checked')
+            ).map(checkbox => checkbox.value);
+
+            const selectedRestrictions = Array.from(
+                document.querySelectorAll('input[name="dietary-restrictions"]:checked')
+            ).map(checkbox => checkbox.value);
+
+            console.log('Selected Preferences:', selectedPreferences);
+            console.log('Selected Restrictions:', selectedRestrictions);
+
+            // Submit the data to your backend or use it for filtering
+        }
+
+        
+        function closeModal(event) {
+            const modal = document.getElementById('recipe-modal');
+
+            // Close modal if clicking outside of modal-content or close-btn
+            if (
+                !event ||
+                event.target.className === 'modal' ||
+                event.target.className === 'close-btn'
+            ) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+    </script>
 </body>
 </html>
