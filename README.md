@@ -221,6 +221,9 @@ pip install flask flask-mail flask-session psycopg2 reportlab requests
 - **Replit Deployment Issue:** Use the Replit shell to install missing dependencies.
 
 
+## Contributors:
+DJ Shade, Blossom Akpedeye, Kelvin Zheng
+
 ## License
 This project is licensed under the MIT License.
 
