@@ -220,9 +220,12 @@ pip install flask flask-mail flask-session psycopg2 reportlab requests
 - **Fonts Not Found:** Add missing .ttf font files in the fonts/ directory.
 - **Replit Deployment Issue:** Use the Replit shell to install missing dependencies.
 
+## Demo 
+![MealMe Demo](mealme-demo.mp4)
+
 
 ## Contributors:
-DJ Shade, Blossom Akpedeye, Kelvin Zheng
+Blossom Akpedeye, Kelvin Zheng, DJ Shade
 
 ## License
 This project is licensed under the MIT License.
