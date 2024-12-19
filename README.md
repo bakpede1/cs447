@@ -32,7 +32,9 @@ MealMe is a Flask-based meal planner application that allows users to create, bo
 - **Export PDF:** Export your weekly meal plan as a PDF.
 
 ## Demo 
-![MealMe Demo](mealme-demo.mp4)
+![MealMe Demo](https://go.screenpal.com/u/gvQD/mealme)
+
+##
 
 ## Dependencies
 - Flask
