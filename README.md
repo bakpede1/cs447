@@ -24,6 +24,37 @@ MealMe is a Flask-based meal planner application that allows users to create, bo
 
 ---
 
+# How to Use
+- **Sign Up:** Create an account and log in.
+- **Set Preferences:** Customize dietary preferences and meal settings.
+- **Add Meals:** Add custom meals or bookmark from available recipes.
+- **Plan Meals:** Use the weekly planner to set meals for each day.
+- **Export PDF:** Export your weekly meal plan as a PDF.
+
+## Demo 
+![MealMe Demo](mealme-demo.mp4)
+
+## Dependencies
+- Flask
+- Flask-Mail
+- Flask-Session
+- Psycopg2
+- ReportLab
+- Requests
+- Werkzeug
+- Python 3.11+
+
+Install them using:
+```bash
+pip install flask flask-mail flask-session psycopg2 reportlab requests
+```
+
+## To deploy on Replit:
+
+1. Upload the project files to Replit.
+2. Ensure requirements.txt includes all dependencies.
+3. Run the project using Replit's Run button.
+
 ## Setup Instructions
 
 Follow these steps to set up and run the project on Replit or locally.
@@ -174,33 +205,6 @@ python main.py
 ```
 Open http://localhost:80 in your browser.
 
-## To deploy on Replit:
-
-1. Upload the project files to Replit.
-2. Ensure requirements.txt includes all dependencies.
-3. Run the project using Replit's Run button.
-
-## Dependencies
-- Flask
-- Flask-Mail
-- Flask-Session
-- Psycopg2
-- ReportLab
-- Requests
-- Werkzeug
-- Python 3.11+
-
-Install them using:
-```bash
-pip install flask flask-mail flask-session psycopg2 reportlab requests
-```
-
-# How to Use
-- **Sign Up:** Create an account and log in.
-- **Set Preferences:** Customize dietary preferences and meal settings.
-- **Add Meals:** Add custom meals or bookmark from available recipes.
-- **Plan Meals:** Use the weekly planner to set meals for each day.
-- **Export PDF:** Export your weekly meal plan as a PDF.
 
 ## Known Issues
 **Dashboard Page:**
@@ -219,11 +223,7 @@ pip install flask flask-mail flask-session psycopg2 reportlab requests
 - **Database Connection Error:** Verify credentials and ensure the PostgreSQL server is active.
 - **Fonts Not Found:** Add missing .ttf font files in the fonts/ directory.
 - **Replit Deployment Issue:** Use the Replit shell to install missing dependencies.
-
-## Demo 
-![MealMe Demo](mealme-demo.mp4)
-
-
+  
 ## Contributors:
 Blossom Akpedeye, Kelvin Zheng, DJ Shade
 
